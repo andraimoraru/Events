@@ -6,6 +6,7 @@ const { handle404, handle500 } = require('./Controllers/errorController');
 const { getAllUsers } = require('./Controllers/userController');
 const { getAllEvents } = require('./Controllers/eventController');
 const { port = 9090 } = process.env;
+const upload = require('./upload');
 
 const app = express();
 
@@ -23,6 +24,16 @@ app.get("/", (req, res) => {
 })
 
 
+//Creating upload endpoint for images
+
+app.use('/images', express.static('upload/images'));
+
+app.post("/upload", upload.single('event'), (req,res) => {
+    res.json({
+        success: 1,
+        image_url: `http://localhost:9090/images/${req.file.filename}`
+    })
+})
 
 
 app.use(handle404)
