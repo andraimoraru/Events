@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
     res.send("Express App is Running")
 })
 
-
 //Creating upload endpoint for images
 
 app.use('/images', express.static('upload/images'));
