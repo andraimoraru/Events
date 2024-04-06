@@ -48,8 +48,45 @@ describe("USERS", () => {
           });
         });
 
+describe("EVENTS", () => {
 
-        
+    describe("GET /events", () => {
+      test("200: should return all events", () => {
+            return request(app)
+                    .get("/events")
+                    .expect(200)
+                    .then(({ body }) => {
+                      expect(body.length).toBe(events.length);
+                      expect(Array.isArray(body)).toBe(true);
+                    });
+                });
+      test("200: should return all events, with the following properties: title, description, location, date_created, date_start, date_end, price, isFree, image, category, url, slots, attendees", () => {
+            return request(app)
+                    .get("/events")
+                    .expect(200)
+                    .then(({ body }) => {
+                      body.forEach((event) => {
+                        expect(event).toMatchObject({
+                          title: expect.any(String),
+                          location: expect.any(String),
+                          date_created: expect.any(String),
+                          date_start: expect.any(String),
+                          date_end: expect.any(String),
+                          price: expect.any(Number),
+                          isFree: expect.any(Boolean),
+                          image: expect.any(String),
+                          category: expect.any(String),
+                          url: expect.any(String),
+                          slots: expect.any(Number),
+                          attendees: expect.any(Array),
+                        });
+                      });
+                    });
+                });
+              });        
+          });
+          
+          
 
     });
 });
