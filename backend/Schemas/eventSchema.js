@@ -29,10 +29,6 @@ const Event = mongoose.model("Event", {
         type: Number,
         required: true,
     },
-    isFree: {
-        type: Boolean,
-        default: false,
-    },
     image: {
         type: String,
         required: true,

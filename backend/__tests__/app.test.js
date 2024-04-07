@@ -73,7 +73,6 @@ describe("EVENTS", () => {
                           date_start: expect.any(String),
                           date_end: expect.any(String),
                           price: expect.any(Number),
-                          isFree: expect.any(Boolean),
                           image: expect.any(String),
                           category: expect.any(String),
                           url: expect.any(String),
