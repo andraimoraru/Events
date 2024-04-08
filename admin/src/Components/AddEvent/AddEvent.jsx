@@ -28,7 +28,7 @@ export const AddEvent= () => {
   }
 
   const Add_Event = async () => {
-    console.log(eventDetails);
+
     let responseData;
     let event = eventDetails;
 
@@ -45,7 +45,6 @@ export const AddEvent= () => {
 
     if (responseData.success) {
       event.image = responseData.image_url;
-      console.log(event);
       await fetch('http://localhost:9090/event', {
         method: "POST",
         headers: {
@@ -53,9 +52,8 @@ export const AddEvent= () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(event),
-      }).then((resp) => resp.json()).then((data)=> {
-        data.success?alert("Event Added"):alert("Failed");
-      })
+      }).then((resp) => {
+        resp.status === 201 ? alert("Event Added") : alert("Failed")})
     }
   }
 
