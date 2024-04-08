@@ -20,6 +20,7 @@ beforeAll(async () => {
 describe("USERS", () => {
 
     describe("GET /users", () => {
+
       test("200: should respond with an array of all users", () => {
         return request(app)
           .get("/users")
@@ -29,6 +30,7 @@ describe("USERS", () => {
             expect(Array.isArray(body)).toBe(true);
           });
       });
+
       test("200: should return all users, with the following properties: firstName, lastName, email, password, eventData, isStaff", () => {
         return request(app)
                 .get("/users")
@@ -44,10 +46,36 @@ describe("USERS", () => {
                       eventData: expect.any(Array),
                       isStaff: expect.any(Boolean),
                     });
-            });
-          });
-        });
+                  });
+                });
+      });
+    });
 
+    describe("POST /user", () => {
+
+      test("201: should add a user to the database", () => {
+        const newUser = {
+          firstName:"Andra",
+          lastName: "Mora",
+          email: "andra@andra.com",
+          password: "12345",
+          eventData: [],
+          isStaff: false,
+          };
+      
+        return request(app)
+              .post("/user")
+              .send(newUser)
+              .expect(201)
+              .then(({ body }) => {
+                const { addedUser } = body;
+                expect(addedUser).toMatchObject({...newUser});
+              });
+        });
+      });  
+    });
+
+    
 describe("EVENTS", () => {
 
     describe("GET /events", () => {
@@ -59,8 +87,9 @@ describe("EVENTS", () => {
                       expect(body.length).toBe(events.length);
                       expect(Array.isArray(body)).toBe(true);
                     });
-                });
-      test("200: should return all events, with the following properties: title, description, location, date_created, date_start, date_end, price, isFree, image, category, url, slots, attendees", () => {
+            });
+
+      test("200: should return all events, with the following properties: title, description, location, date_created, date_start, date_end, price, image, category, url, slots, attendees", () => {
             return request(app)
                     .get("/events")
                     .expect(200)
@@ -81,11 +110,48 @@ describe("EVENTS", () => {
                         });
                       });
                     });
-                });
-              });        
-          });
-          
-          
-
+      });
     });
-});
+
+
+    describe("POST /event", () => {
+      test("201: should create a new event on the database", () => {
+                const newEvent = {
+                      title: "Art deco exposition",
+                      description: "Explore new art.",
+                      location: "Swansea, UK",
+                      date_created: new Date(),
+                      date_start: "2024-05-12",
+                      date_end: "2024-06-12",
+                      price: 199,
+                      image: "art_deco.img",
+                      category: "Art",
+                      url: "",
+                      slots: 10,
+                      attendees: [],
+                    };
+              
+                return request(app)
+                      .post("/event")
+                      .send(newEvent)
+                      .expect(201)
+                      .then(({ body }) => {
+                        const { addedEvent } = body;
+                        expect(addedEvent).toHaveProperty('_id', expect.any(String))
+                        expect(addedEvent).toHaveProperty('__v', expect.any(Number))
+                        expect(addedEvent).toHaveProperty('title', "Art deco exposition")
+                        expect(addedEvent).toHaveProperty('description', "Explore new art.")
+                        expect(addedEvent).toHaveProperty('location', "Swansea, UK")
+                        expect(new Date(addedEvent.date_created)).toBeInstanceOf(Date)
+                        expect(addedEvent.date_start).toMatch(/2024-05-12/)
+                        expect(addedEvent.date_end).toMatch(/2024-06-12/)
+                        expect(addedEvent).toHaveProperty('price', 199)
+                        expect(addedEvent).toHaveProperty('image', "art_deco.img")
+                        expect(addedEvent).toHaveProperty('category', "Art")
+                        expect(addedEvent).toHaveProperty('url', "")
+                        expect(addedEvent).toHaveProperty('slots', 10)
+                        expect(addedEvent).toHaveProperty('attendees', expect.any(Array))
+                      });
+       });
+    });
+});        
