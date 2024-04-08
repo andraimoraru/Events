@@ -4,7 +4,7 @@ const cors = require('cors');
 const uri = require("./connection");
 const { handle404, handle500 } = require('./Controllers/errorController');
 const { getAllUsers, postUser } = require('./Controllers/userController');
-const { getAllEvents, postEvent } = require('./Controllers/eventController');
+const { getAllEvents, postEvent, getEventByID } = require('./Controllers/eventController');
 const { port = 9090 } = process.env;
 const upload = require('./upload');
 
@@ -17,6 +17,7 @@ mongoose.connect(uri);
 
 app.get("/users", getAllUsers);
 app.get("/events", getAllEvents);
+app.get("/events/:eventID", getEventByID);
 
 app.post("/event", postEvent);
 app.post("/user", postUser);

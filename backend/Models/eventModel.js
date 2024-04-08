@@ -9,3 +9,9 @@ exports.addEvent = async (newEvent) => {
    const eventToAdd = new Event({...newEvent});
    return eventToAdd.save();
 }
+
+exports.fetchEventByID = async (id) => {
+
+   const event = await Event.find({id: `${id}`})
+   return event;
+}
