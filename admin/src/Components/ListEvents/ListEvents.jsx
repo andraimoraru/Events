@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './ListEvents.css';
 import cross_icon from '../../assets/cross_icon.png';
+import { fetchEvents } from '../../../../frontend/src/API/api';
 
 export const ListEvents = () => {
 
   const [allEvents, setAllEvents] = useState([]);
 
-  const fetchInfo = async () => {
-    await fetch('http://localhost:9090/events').then((res) => res.json()).then((data) => {setAllEvents(data)});
-  }
-
   useEffect(() => {
-    fetchInfo()
+    fetchEvents().then((res) => res.json()).then((data) => {setAllEvents(data)});
   }, []);
 
   const remove_event = async (id) => {
