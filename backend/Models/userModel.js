@@ -12,3 +12,8 @@ exports.addUser = async (newUser) => {
   return userToAdd.save();
 }
 
+exports.fetchUserByEmail = async (email) => {
+  const user = await User.find({email:`${email}`})
+  return user;
+}
+

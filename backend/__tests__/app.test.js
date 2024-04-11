@@ -26,12 +26,12 @@ describe("USERS", () => {
           .get("/users")
           .expect(200)
           .then(({ body }) => {
-            expect(body.length).toBe(users.length);
             expect(Array.isArray(body)).toBe(true);
+            expect(body.length).toBe(users.length);
           });
       });
 
-      test("200: should return all users, with the following properties: firstName, lastName, email, password, eventData, isStaff", () => {
+      test("200: should return all users, with the following properties: id, username, firstName, lastName, email, password, eventData, isStaff", () => {
         return request(app)
                 .get("/users")
                 .expect(200)
@@ -39,6 +39,7 @@ describe("USERS", () => {
                   body.forEach((user) => {
                     expect(user).toMatchObject({
                       _id: expect.any(String),
+                      username: expect.any(String),
                       firstName: expect.any(String),
                       lastName: expect.any(String),
                       email: expect.any(String),
@@ -49,18 +50,34 @@ describe("USERS", () => {
                   });
                 });
       });
+
+      describe("GET /users/:email", () => {
+        test("200: should return the corresponding user by its email", () => {
+                      return request(app)
+                            .get("/users/alice.johnson@example.com")
+                            .expect(200)
+                            .then(({body}) => {
+                              expect(body.email = "alice.johnson@example.com")
+                              });
+        })
+        test("404: returns an error message if email is not found", () => {
+          return request(app)
+                  .get("/users/hello@hello")
+                  .expect(404)
+                  .then(({body}) => {
+                    expect(body.msg = "Email not found")
+                    });
+        })
+      })
     });
 
     describe("POST /user", () => {
 
       test("201: should add a user to the database", () => {
         const newUser = {
-          firstName:"Andra",
-          lastName: "Mora",
+          username: "andrai",
           email: "andra@andra.com",
           password: "12345",
-          eventData: [],
-          isStaff: false,
           };
       
         return request(app)
@@ -79,17 +96,17 @@ describe("USERS", () => {
 describe("EVENTS", () => {
 
     describe("GET /events", () => {
-      test("200: should return all events", () => {
+      test("200: should return an array with all events", () => {
             return request(app)
                     .get("/events")
                     .expect(200)
                     .then(({ body }) => {
-                      expect(body.length).toBe(events.length);
                       expect(Array.isArray(body)).toBe(true);
+                      expect(body.length).toBe(events.length);
                     });
             });
 
-      test("200: should return all events, with the following properties: title, description, location, date_created, date_start, date_end, price, image, category, url, slots, attendees", () => {
+      test("200: should return all events, with the following properties: id, title, description, location, date_created, date_start, date_end, price, image, category, url, slots, attendees", () => {
             return request(app)
                     .get("/events")
                     .expect(200)
@@ -140,7 +157,7 @@ describe("EVENTS", () => {
                 .then(({body}) => {
                   expect(body.msg = "ID not found")
                   });
-})
+      })
     })
 
 
@@ -167,8 +184,6 @@ describe("EVENTS", () => {
                       .then(({ body }) => {
                         const { addedEvent } = body;
                         expect(addedEvent).toHaveProperty('id', expect.any(Number))
-                        expect(addedEvent).toHaveProperty('_id', expect.any(String))
-                        expect(addedEvent).toHaveProperty('__v', expect.any(Number))
                         expect(addedEvent).toHaveProperty('title', "Art deco exposition")
                         expect(addedEvent).toHaveProperty('description', "Explore new art.")
                         expect(addedEvent).toHaveProperty('location', "Swansea, UK")

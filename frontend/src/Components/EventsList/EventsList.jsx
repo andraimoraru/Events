@@ -18,8 +18,8 @@ export const EventsList = () => {
         <h1>All events</h1>
         <hr />
         <div className="events">
-            {allEvents.map((item)=> {
-                return <EventBox key= {item.id} id={item.id} title={item.title} image={item.image} location={item.location} price={item.price}/>
+            {allEvents.map((event)=> {
+                return <EventBox key= {event.id} id={event.id} title={event.title} image={event.image} location={event.location} price={event.price}/>
             })}
         </div>
     </div>

@@ -11,7 +11,6 @@ exports.addEvent = async (newEvent) => {
 }
 
 exports.fetchEventByID = async (id) => {
-
    const event = await Event.find({id: `${id}`})
    return event;
 }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './CSS/LoginSignup.css';
+import { addUser } from '../API/api';
+import { loginUser } from '../API/api';
 
 
 export const LoginSignup = () => {
 
   const [state, setState] = useState("Log In");
-
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -13,50 +14,37 @@ export const LoginSignup = () => {
   });
 
   const changeHandler = (e) => {
-    setFormData({...formData, [e.target.name]:e.target.value})
-  }
+    setFormData({...formData, [e.target.name]: e.target.value})
+  };
 
   const login = async () => {
-    let responseData;
-    await fetch('http://localhost:9090/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    }).then((response) => response.json()).then((data) => responseData=data);
-
-    if (responseData.success) {
-      localStorage.setItem('auth-token', responseData.token);
-      window.location.replace("/");
+    try {
+      console.log(formData, "in loginsignup")
+      const responseData = await loginUser(formData);
+      if (responseData.success) {
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace("/events");
+      } else {
+        alert(responseData.errors);
+      }
+    } catch (error) {
+      alert("Login failed: " + error.errors);
     }
-    else {
-      alert(responseData.errors);
-    }
-
-  }
+  };
 
   const signup = async () => {
-    let responseData;
-    await fetch('http://localhost:9090/signup', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    }).then((response) => response.json()).then((data) => responseData=data);
-
-    if (responseData.success) {
-      localStorage.setItem('auth-token', responseData.token);
-      window.location.replace("/");
+    try {
+      const responseData = await addUser(formData);
+      if (responseData.success) {
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace("/events");
+      } else {
+        alert(responseData.errors);
+      }
+    } catch (error) {
+      alert("Signup failed: " + error.errors);
     }
-    else {
-      alert(responseData.errors);
-    }
-
-  }
+  };
 
   return (
     <div className='loginsignup'>

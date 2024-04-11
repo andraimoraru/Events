@@ -1,24 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchEventByID } from '../API/api';
 import EventDisplay from '../Components/EventDisplay/EventDisplay';
 
 
 export const  Event = () => {
 
-  const [all_events, setAll_Events] = useState([]);
+  const [event, setEvent] = useState([]);
+  const { eventId } = useParams();
 
   useEffect(() => {
-    fetch('http://localhost:4000/allevents')
-    .then((response) => response.json())
-    .then((data) => setAll_Events(data));
-  }, [])
+    fetchEventByID(eventId)
+    .then((data) => setEvent(data));
+  }, []);
 
-  const { eventId } = useParams();
-  const event = all_events.find((e)=> e.id===Number(eventId));
   return (
-    <div >
-      <EventDisplay event = {event} />
-    </div>
+       <EventDisplay key= {event.id} id={event.id} title={event.title} image={event.image} location={event.location} price={event.price} description = {event.description} date_start={event.date_start} date_end={event.date_end}/>
   )
 }
 
