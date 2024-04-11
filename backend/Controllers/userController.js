@@ -1,4 +1,5 @@
-const { fetchAllUsers, addUser } = require("../Models/userModel")
+const { fetchAllUsers, addUser, fetchUserByEmail } = require("../Models/userModel");
+const jwt = require("jsonwebtoken");
 
 exports.getAllUsers = (req, res, next) => {
 
@@ -9,16 +10,82 @@ exports.getAllUsers = (req, res, next) => {
 
 exports.postUser = (req, res, next) => {
 
+    const { username, email, password } = req.body;
+    
+    if (!username) {
+        return res.status(400).json({ success: false, message: "Username is required" });
+    }
+    if (!email) {
+        return res.status(400).json({ success: false, message: "Email is required" });
+    }
+    if (!password) {
+        return res.status(400).json({ success: false, message: "Password is required" });
+    }
+
+
     const user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        username: req.body.username,
+        firstName: "",
+        lastName: "",
         email: req.body.email,
         password: req.body.password,
         eventData: [],
         isStaff: false,
-    };
-    addUser(user).then((data) => {
-        res.status(201).send({addedUser: data})
-    }).catch(next)
+    }
+    addUser(user).then((newUser) => {
+        const userData = {
+            user: {
+                id: newUser._id 
+            }
+        };  
+        const token = jwt.sign(userData, 'secret_event');
+        res.status(201).json({ success: true, token, addedUser: newUser });
+    })
+    .catch(next);
+    
 }
+
+exports.getUserByEmail = (req, res, next) => {
+    
+    const email  = req.params.email;
+
+    if (!email) {
+        return res.status(400).send({status: 400, msg : 'Email invalid'});
+    } else {
+        fetchUserByEmail(email).then((data) => {
+            if (data.length > 0) {
+                res.status(200).send(data) 
+            } else res.status(404).send({status: 404, msg : 'Email not found'})            
+    }).catch(next)
+    }
+}
+
+exports.loginUser = (req, res, next) => {
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    fetchUserByEmail(email).then((user) => {
+        if (user) {
+            const passCompare = password === user[0].password;
+            if (passCompare) {
+                const data = {
+                    user: {
+                        id: user._id
+                    }
+                }
+                const token = jwt.sign(data, 'secret_event');
+                res.status(200).json({success:true, token, user: user});
+            }
+            else {
+                res.status(400).json({success:false, errors: "Wrong password"})
+            }
+        }
+        else {
+            res.status(400).json({success:false, errors: "Wrong email address"})
+        }
+        })       
+        .catch(next)
+    }
+
 

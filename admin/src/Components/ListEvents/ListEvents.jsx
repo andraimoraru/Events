@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './ListEvents.css';
 import cross_icon from '../../assets/cross_icon.png';
-import { fetchEvents } from '../../../../frontend/src/API/api';
+import { fetchEvents } from '../../API/api';
 
 export const ListEvents = () => {
 
   const [allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
-    fetchEvents().then((res) => res.json()).then((data) => {setAllEvents(data)});
+    fetchEvents().then((data) => {setAllEvents(data)});
   }, []);
 
   const remove_event = async (id) => {
@@ -27,9 +27,9 @@ export const ListEvents = () => {
       </div>
       <div className="listevents-allevents">
         <hr />
-        {allEvents.map((event,index) => {
+        {allEvents.map((event) => {
           return <>
-                  <div key={index} className="listevents-format-main listevents-format">
+                  <div key={event.id} className="listevents-format-main listevents-format">
                     <img src={event.image} className="listevents-events-icon" alt="" />
                     <p>{event.title}</p>
                     <p>£{event.price}</p>

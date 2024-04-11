@@ -1,22 +1,29 @@
 import React from 'react';
 import './EventDisplay.css';
-import { Link } from 'react-router-dom';
 
-export const EventDisplay = (props) => {
+export const EventDisplay = (event) => {
 
   return (
-      <div className='event'>
-          <Link to={`/event/${props.id}`} key={props.id} id = {props.id} ><img onClick={window.scrollTo(0,0)} src={props.image} alt="" /></Link>
-          <p>{props.title}</p>
-          <div className="event-details">
-              <div className="event-location">
-                  {props.location}
-              </div>
-              <div className="event-price">
-                  £{props.price}
-              </div>
-          </div>
-      </div>
+    <div className="">
+                <div className="eventdisplay">
+                <div className='eventdisplay-left'><img className='image' src={event.image} alt="" /></div>
+                    <div className="eventdisplay-right">
+                        <div className="event_title"><h1>{event.title}</h1></div>        
+                        <div className="event_details">
+                            <div className="eventlocation">{event.location}</div>
+                            <div className="eventprice"> £{event.price}</div>
+                        </div>
+                        <div className="event_details">
+                            <div className="eventstart">{new Date(event.date_start).toUTCString()}</div>
+                            <div className="eventend"> {new Date(event.date_end).toUTCString()}</div>
+                        </div>
+                        <button>Book your place now</button>
+                    </div>
+                </div>
+        <div className="event-description"><h1>{event.description}</h1></div>
+
+    </div>
+
     )
 }
 

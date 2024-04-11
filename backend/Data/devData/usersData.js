@@ -1,5 +1,7 @@
 const usersData = [
-    {
+      {
+        id: 1,
+        username: "AliceJ",
         firstName: "Alice",
         lastName: "Johnson",
         email: "alice.johnson@example.com",
@@ -8,6 +10,8 @@ const usersData = [
         isStaff: false
       },
       {
+        id: 2,
+        username: "BobS",
         firstName: "Bob",
         lastName: "Smith",
         email: "bob.smith@example.com",
@@ -16,6 +20,8 @@ const usersData = [
         isStaff: true
       },
       {
+        id: 3,
+        username: "CharlieB",
         firstName: "Charlie",
         lastName: "Brown",
         email: "charlie.brown@example.com",
@@ -24,6 +30,8 @@ const usersData = [
         isStaff: false
       },
       {
+        id: 4,
+        username: "DPrince",
         firstName: "Diana",
         lastName: "Prince",
         email: "diana.prince@example.com",
@@ -32,6 +40,8 @@ const usersData = [
         isStaff: false
       },
       {
+        id: 5,
+        username: "EHunt",
         firstName: "Ethan",
         lastName: "Hunt",
         email: "ethan.hunt@example.com",
@@ -40,6 +50,8 @@ const usersData = [
         isStaff: false
       },
       { 
+        id: 6,
+        username: "FGal",
         firstName: "Fiona", 
         lastName: "Gallagher", 
         email: "fiona.gallagher@example.com", 
@@ -48,6 +60,8 @@ const usersData = [
         isStaff: false 
       },
       { 
+        id: 7,
+        username: "GeorgeB",
         firstName: "George", 
         lastName: "Bluth", 
         email: "george.bluth@example.com", 
@@ -56,6 +70,8 @@ const usersData = [
         isStaff: false 
       },
       { 
+        id: 8,
+        username: "HBake",
         firstName: "Hannah", 
         lastName: "Baker", 
         email: "hannah.baker@example.com", 
@@ -64,6 +80,8 @@ const usersData = [
         isStaff: true 
       },
       { 
+        id: 9,
+        username: "IanGalla",
         firstName: "Ian", 
         lastName: "Gallagher", 
         email: "ian.gallagher@example.com", 
@@ -72,6 +90,8 @@ const usersData = [
         isStaff: false 
       },
       { 
+        id: 10,
+        username: "JCap",
         firstName: "Juliet", 
         lastName: "Capulet", 
         email: "juliet.capulet@example.com", 

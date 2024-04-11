@@ -10,8 +10,7 @@ const EventsContextProvider = (props) => {
     const [all_events, setAll_Events] = useState([]);
 
     useEffect(() => {
-        fetchEvents
-        .then((response) => response.json())
+        fetchEvents()
         .then((data) => setAll_Events(data))
     }, [])
 
