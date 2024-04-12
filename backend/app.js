@@ -3,7 +3,7 @@ const mongoose = require ('mongoose');
 const cors = require('cors');
 const uri = require("./connection");
 const { handle404, handle500 } = require('./Controllers/errorController');
-const { getAllUsers, postUser, getUserByEmail, loginUser } = require('./Controllers/userController');
+const { getAllUsers, postUser, getUserByEmail, loginUser, patchUser } = require('./Controllers/userController');
 const { getAllEvents, postEvent, getEventByID } = require('./Controllers/eventController');
 const { port = 9090 } = process.env;
 const jwt = require("jsonwebtoken");
@@ -24,6 +24,7 @@ app.get("/users/:email", getUserByEmail);
 app.post("/event", postEvent);
 app.post("/user", postUser);
 app.post('/login', loginUser);
+app.patch('/users/:email', patchUser)
 
 
 

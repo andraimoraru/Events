@@ -21,7 +21,7 @@ describe("USERS", () => {
 
     describe("GET /users", () => {
 
-      test("200: should respond with an array of all users", () => {
+      test("200: responds with an array of all users", () => {
         return request(app)
           .get("/users")
           .expect(200)
@@ -31,7 +31,7 @@ describe("USERS", () => {
           });
       });
 
-      test("200: should return all users, with the following properties: id, username, firstName, lastName, email, password, eventData, isStaff", () => {
+      test("200: returns all users, with the following properties: id, username, firstName, lastName, email, password, eventData, isStaff", () => {
         return request(app)
                 .get("/users")
                 .expect(200)
@@ -52,7 +52,7 @@ describe("USERS", () => {
       });
 
       describe("GET /users/:email", () => {
-        test("200: should return the corresponding user by its email", () => {
+        test("200: returns the corresponding user by its email", () => {
                       return request(app)
                             .get("/users/alice.johnson@example.com")
                             .expect(200)
@@ -73,7 +73,7 @@ describe("USERS", () => {
 
     describe("POST /user", () => {
 
-      test("201: should add a user to the database", () => {
+      test("201: adds a user to the database", () => {
         const newUser = {
           username: "andrai",
           email: "andra@andra.com",
@@ -90,13 +90,38 @@ describe("USERS", () => {
               });
         });
       });  
-    });
+
+    describe("PATCH /users/:email", () => {
+      test("200: updates the user staff status", () => {
+        const testPatch = { isStaff: true };
+        return request(app)
+            .patch("/users/alice.johnson@example.com")
+            .send(testPatch)
+            .expect(200)
+            .then(({ body }) => {
+              const updatedUser = body;
+              expect(updatedUser.isStaff).toBe(true);
+            });
+        });
+        test("404: returns an error message if user does not exist", () => {
+          const testPatch = { isStaff: true };
+          return request(app)
+            .patch("/users/noUser")
+            .send(testPatch)
+            .expect(404)
+            .then(( { body } ) => {
+              expect(body.message).toBe("User Not Found");
+            });
+        });
+      });
+    
+});
 
     
 describe("EVENTS", () => {
 
     describe("GET /events", () => {
-      test("200: should return an array with all events", () => {
+      test("200: returns an array with all events", () => {
             return request(app)
                     .get("/events")
                     .expect(200)
@@ -106,7 +131,7 @@ describe("EVENTS", () => {
                     });
             });
 
-      test("200: should return all events, with the following properties: id, title, description, location, date_created, date_start, date_end, price, image, category, url, slots, attendees", () => {
+      test("200: returns all events, with the following properties: id, title, description, location, date_created, date_start, date_end, price, image, category, url, slots, attendees", () => {
             return request(app)
                     .get("/events")
                     .expect(200)
@@ -132,7 +157,7 @@ describe("EVENTS", () => {
     });
 
     describe("GET /events/:eventID", () => {
-      test("200: should return the corresponding event by its ID", () => {
+      test("200: returns the corresponding event by its ID", () => {
                     return request(app)
                           .get("/events/1")
                           .expect(200)
@@ -162,7 +187,7 @@ describe("EVENTS", () => {
 
 
     describe("POST /event", () => {
-      test("201: should create a new event on the database", () => {
+      test("201: creates a new event on the database", () => {
                 const newEvent = {
                       title: "Art deco exposition",
                       description: "Explore new art.",
@@ -197,6 +222,6 @@ describe("EVENTS", () => {
                         expect(addedEvent).toHaveProperty('slots', 10)
                         expect(addedEvent).toHaveProperty('attendees', expect.any(Array))
                       });
-       });
+      });
     });
 });        

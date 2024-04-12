@@ -51,3 +51,22 @@ export const fetchEventByID = async (eventID) => {
     }
   }
 
+  export const updateStaff = async (email, property) => {
+    try {
+      const response = await axios.patch(`http://localhost:9090/users/${email}`, property);
+      return response.data;
+    } catch (error) {
+      console.error("There was an error fetching the user:", error);
+      throw error;
+    }
+  }
+
+  export const addEvent = async (event) => {
+    try {
+      const response = await axios.post(`http://localhost:9090/event`, event);
+      return response.data;
+    } catch (error) {
+      console.error("There was an error fetching the user:", error);
+      throw error;
+    }
+  }

@@ -54,10 +54,8 @@ export const fetchEventByID = async (eventID) => {
   }
 
   export const loginUser = async (user) => {
-    console.log(user, "in api");
     try {
       const response = await axios.post("http://localhost:9090/login", user);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error("There was an error fetching the user:", error);

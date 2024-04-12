@@ -17,3 +17,8 @@ exports.fetchUserByEmail = async (email) => {
   return user;
 }
 
+exports.updateUser = async (email, propertyToUpdate) => {
+
+  const updatedUser = await User.findOneAndUpdate(email, propertyToUpdate, { new: true });
+  return updatedUser;
+}
