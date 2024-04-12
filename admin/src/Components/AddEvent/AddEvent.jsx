@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './AddEvent.css';
 import upload_area from '../../assets/upload_area.svg'
+import { addEvent } from '../../API/api';
 
 export const AddEvent= () => {
 
@@ -45,15 +46,10 @@ export const AddEvent= () => {
 
     if (responseData.success) {
       event.image = responseData.image_url;
-      await fetch('http://localhost:9090/event', {
-        method: "POST",
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(event),
-      }).then((resp) => {
-        resp.status === 201 ? alert("Event Added") : alert("Failed")})
+      await addEvent(event).then((res) => {
+        res.status === 201 ?                         
+                           window.location.replace("/events")
+                           : alert("Failed to add event")})
     }
   }
 

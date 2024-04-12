@@ -34,7 +34,7 @@ exports.postEvent = (req, res, next) => {
             attendees: [],
         };
         addEvent(event).then((data) => {
-            res.status(201).send({addedEvent: data})
+            res.status(201).send({addedEvent: data, status: 201})
         }).catch(next)
     })
 };

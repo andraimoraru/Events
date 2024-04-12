@@ -1,4 +1,4 @@
-const { fetchAllUsers, addUser, fetchUserByEmail } = require("../Models/userModel");
+const { fetchAllUsers, addUser, fetchUserByEmail, updateUser } = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
 
 exports.getAllUsers = (req, res, next) => {
@@ -88,4 +88,18 @@ exports.loginUser = (req, res, next) => {
         .catch(next)
     }
 
+    exports.patchUser = (req, res, next) => {
+        
+        const email = req.params;
+        const propertyToUpdate = req.body;
 
+        fetchUserByEmail(email.email).then((user) => {
+            if (!user[0]) {  
+                return res.status(404).send({ message: "User Not Found" });
+            }
+            updateUser(email, propertyToUpdate).then((updatedUser) => {
+                res.status(200).send(updatedUser);
+            });
+        })
+        .catch(next);
+    }
