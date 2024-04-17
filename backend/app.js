@@ -4,11 +4,10 @@ const cors = require('cors');
 const uri = require("./connection");
 const { handle404, handle500 } = require('./Controllers/errorController');
 const { getAllUsers, postUser, getUserByEmail, loginUser, patchUser } = require('./Controllers/userController');
-const { getAllEvents, postEvent, getEventByID } = require('./Controllers/eventController');
+const { getAllEvents, postEvent, getEventByID, deleteEventByID } = require('./Controllers/eventController');
 const { port = 9090 } = process.env;
-const jwt = require("jsonwebtoken");
 const upload = require('./upload');
-const { User } = require('./Schemas/userSchema');
+
 
 const app = express();
 
@@ -17,14 +16,15 @@ app.use(cors());
 
 mongoose.connect(uri);
 
-app.get("/users", getAllUsers);
-app.get("/events", getAllEvents);
-app.get("/events/:eventID", getEventByID);
-app.get("/users/:email", getUserByEmail);
-app.post("/event", postEvent);
-app.post("/user", postUser);
+app.get('/users', getAllUsers);
+app.get('/events', getAllEvents);
+app.get('/events/:eventID', getEventByID);
+app.get('/users/:email', getUserByEmail);
+app.post('/event', postEvent);
+app.post('/user', postUser);
 app.post('/login', loginUser);
-app.patch('/users/:email', patchUser)
+app.patch('/users/:email', patchUser);
+app.delete('/events/:eventID', deleteEventByID);
 
 
 

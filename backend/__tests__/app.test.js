@@ -224,4 +224,28 @@ describe("EVENTS", () => {
                       });
       });
     });
-});        
+
+    describe(("DELETE /events/:eventID"), ()=> {
+      test(("204: deletes an event by its ID"), () => {
+                return request(app)           
+                      .delete("/events/5")
+                      .expect(204)
+                      .then(() => {
+                        return Event.find({id: 5}).then((result) => {
+                          expect(result).toEqual([]);
+                        })
+                      })
+
+      })
+      test(("404: returns an error message if ID is not found"), () => {
+        return request(app)           
+              .delete("/events/99")
+              .expect(404)
+              .then(({body}) => {
+                  expect(body.message = "ID Not Found");
+                })
+              })
+
+})
+
+})    

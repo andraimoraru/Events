@@ -66,7 +66,19 @@ export const fetchEventByID = async (eventID) => {
       const response = await axios.post(`http://localhost:9090/event`, event);
       return response.data;
     } catch (error) {
-      console.error("There was an error fetching the user:", error);
+      console.error("There was an error fetching the event:", error);
       throw error;
     }
+  }
+
+
+  export const removeEvent = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:9090/events/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("There was an error fetching the event:", error);
+      throw error;
+    }
+
   }
