@@ -1,17 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import './ListEvents.css';
 import cross_icon from '../../assets/cross_icon.png';
-import { fetchEvents } from '../../API/api';
+import { fetchEvents, removeEvent } from '../../API/api';
 
 export const ListEvents = () => {
 
   const [allEvents, setAllEvents] = useState([]);
 
-  useEffect(() => {
+  const fetchInfo = async () => {
     fetchEvents().then((data) => {setAllEvents(data)});
+  }
+
+  useEffect(() => {
+    fetchInfo();   
   }, []);
 
   const remove_event = async (id) => {
+    const result = await removeEvent(id);
+    if (result == "") {
+      await fetchInfo();
+    }   
   }
 
   return (
@@ -35,7 +43,7 @@ export const ListEvents = () => {
                     <p>£{event.price}</p>
                     <p>{event.description}</p>
                     <p>{event.location}</p>
-                    <img onClick={()=> {remove_event(event._id)}}className="listevents-remove-icon" src={cross_icon} alt="" />
+                    <img onClick={()=> {remove_event(event.id)}}className="listevents-remove-icon" src={cross_icon} alt="" />
                   </div>
                   <hr />
                  </>

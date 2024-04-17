@@ -1,4 +1,4 @@
-const { fetchAllEvents, addEvent, fetchEventByID } = require("../Models/eventModel")
+const { fetchAllEvents, addEvent, fetchEventByID, removeEventByID } = require("../Models/eventModel")
 
 
 exports.getAllEvents = (req, res, next) => {
@@ -58,4 +58,18 @@ exports.getEventByID = (req, res, next) => {
             } else res.status(404).send({status: 404, msg : 'ID not found'})            
     }).catch(next)
     }
+}
+
+exports.deleteEventByID = (req, res, next) => {
+    const  id   = req.params.eventID;
+    removeEventByID(id).then((result) => {
+        if (result.deletedCount === 0) {
+            res.status(404).send({ status: 404, message: "ID Not Found" });
+        }
+        else {
+        res.status(204).send({ status: 204, message: "Event deleted" })
+        }
+
+    }).catch(next)
+
 }

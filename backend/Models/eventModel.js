@@ -11,6 +11,11 @@ exports.addEvent = async (newEvent) => {
 }
 
 exports.fetchEventByID = async (id) => {
-   const event = await Event.find({id: `${id}`})
+   const event = await Event.find({id: id})
    return event;
+}
+
+exports.removeEventByID = async (id) => {
+   const result = await Event.deleteOne({id: id});
+   return result;
 }
