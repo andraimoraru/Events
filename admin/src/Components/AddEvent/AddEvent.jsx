@@ -25,6 +25,7 @@ export const AddEvent= () => {
   }
 
   const changeHandler = (e) => {
+    e.preventDefault();
     setEventDetails({...eventDetails, [e.target.name]:e.target.value});
   }
 
@@ -76,11 +77,11 @@ export const AddEvent= () => {
       <div className="addevent-price">
         <div className="addevent-eventfield">
             <p>Start date</p>
-            <input type="text" value={eventDetails.date_start} onChange={changeHandler} name='date_start' placeholder='Type here'/>
+            <input type="date" value={eventDetails.date_start} onChange={changeHandler} name='date_start' placeholder='Type here'/>
           </div>
           <div className="addevent-eventfield">
             <p>End date</p>
-            <input type="text" value={eventDetails.date_end} onChange={changeHandler} name='date_end' placeholder='Type here'/>
+            <input type="date" value={eventDetails.date_end} onChange={changeHandler} name='date_end' placeholder='Type here'/>
           </div>
       </div>
       <div className="addevent-eventfield">

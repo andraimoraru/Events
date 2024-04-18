@@ -2,16 +2,23 @@ import React, { useState, useEffect } from 'react';
 import './EventsList.css';
 import EventBox from '../EventBox/EventBox';
 import { fetchEvents } from '../../API/api';
+import { useContext } from 'react';
+import { UserContext } from '../../Context/UserContext';
 
 export const EventsList = () => {
 
+  const { user } = useContext(UserContext);
   const [allEvents, setAllEvents] = useState([]);
+  const  [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
+    setIsLoading(true);
     fetchEvents().then((events) => {setAllEvents(events)})
+    setIsLoading(false);
   }, []);
 
+  if (isLoading) return <p> Loading ... </p>;
 
   return (
     <div className='all-events'>

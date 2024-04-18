@@ -3,6 +3,10 @@ import './EventDisplay.css';
 
 export const EventDisplay = (event) => {
 
+    const book_event = async (id) => {
+        
+    }
+    
   return (
     <div className="">
                 <div className="eventdisplay">
@@ -17,7 +21,7 @@ export const EventDisplay = (event) => {
                             <div className="eventstart">{new Date(event.date_start).toUTCString()}</div>
                             <div className="eventend"> {new Date(event.date_end).toUTCString()}</div>
                         </div>
-                        <button>Book your place now</button>
+                        <button onClick={() => {book_event(event.id)}} >Book your place now</button>
                     </div>
                 </div>
         <div className="event-description"><h1>{event.description}</h1></div>
