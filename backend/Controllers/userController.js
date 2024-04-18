@@ -71,11 +71,11 @@ exports.loginUser = (req, res, next) => {
             if (passCompare) {
                 const data = {
                     user: {
-                        id: user._id
+                        id: user[0]._id
                     }
                 }
-                const token = jwt.sign(data, 'secret_event');
-                res.status(200).json({success:true, token, user: user});
+                const token = jwt.sign(data, 'secret_event', { expiresIn: '1h' });
+                res.status(200).json({success:true, token, user: user[0]});
             }
             else {
                 res.status(400).json({success:false, errors: "Wrong password"})

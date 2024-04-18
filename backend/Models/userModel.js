@@ -13,7 +13,7 @@ exports.addUser = async (newUser) => {
 }
 
 exports.fetchUserByEmail = async (email) => {
-  const user = await User.find({email:`${email}`})
+  const user = await User.find({ email : email })
   return user;
 }
 

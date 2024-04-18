@@ -6,11 +6,17 @@ import { Footer } from './Components/Footer/Footer.jsx';
 import EventsList from './Components/EventsList/EventsList.jsx';
 import Account from './Pages/Account.jsx';
 import Event from './Pages/Event.jsx';
+import { UserProvider } from './Context/UserContext.jsx';
+import ProtectedRoute from './Components/ProtectedRoute'; 
+import { Admin } from '../../admin/src/Pages/Admin/Admin.jsx';
+
 
 
 function App() {
+  
   return (
     <div>
+      <UserProvider>
       <BrowserRouter>
         <Navbar/>
         <Routes>
@@ -21,10 +27,18 @@ function App() {
           <Route path = "/event" element = {<Event/>}>
             <Route path = ":eventId" element = {<Event/>}/>
           </Route>
+          <Route 
+              path="/admin/*" 
+              element={
+                <ProtectedRoute>
+                  <Admin />
+                </ProtectedRoute>
+              } 
+            />
         </Routes>
         <Footer/>
       </BrowserRouter>
-
+      </UserProvider>
     </div>
 
   )
