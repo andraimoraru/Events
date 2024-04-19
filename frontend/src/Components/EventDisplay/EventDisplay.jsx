@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './EventDisplay.css';
+import { updateBooking } from '../../API/api';
+import { UserContext } from '../../Context/UserContext';
 
 export const EventDisplay = (event) => {
 
-    const book_event = async (id) => {
-        
+    const { user, saveUser } = useContext(UserContext);
+    const [isBooked, setIsBooked] = useState(false);
+
+    const addToGoogleCalendar = () => {
+
     }
-    
+
+    const book_event = async (eventID) => {
+        try {
+            const updatedUser = await updateBooking(user.email, { eventID: eventID} );
+            if (updatedUser) {  
+                saveUser(updatedUser)
+                setIsBooked(true);  
+                addToGoogleCalendar();  
+            }
+        } catch (error) {
+            console.error("Booking failed:", error);
+        }
+    };
   return (
     <div className="">
                 <div className="eventdisplay">
@@ -21,7 +38,9 @@ export const EventDisplay = (event) => {
                             <div className="eventstart">{new Date(event.date_start).toUTCString()}</div>
                             <div className="eventend"> {new Date(event.date_end).toUTCString()}</div>
                         </div>
-                        <button onClick={() => {book_event(event.id)}} >Book your place now</button>
+                        <button onClick={() => {book_event(event.id)}} >
+                                 {isBooked ? "Event Booked" : "Book your place now"}
+                        </button>
                     </div>
                 </div>
         <div className="event-description"><h1>{event.description}</h1></div>

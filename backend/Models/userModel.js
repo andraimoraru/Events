@@ -22,3 +22,13 @@ exports.updateUser = async (email, propertyToUpdate) => {
   const updatedUser = await User.findOneAndUpdate(email, propertyToUpdate, { new: true });
   return updatedUser;
 }
+
+exports.updateBookingForUser = async (email, eventID) => {
+  const updatedUser = await User.findOneAndUpdate(
+    { email: email },
+    { $addToSet: { eventData:  eventID } },
+    { new: true }
+);
+  return updatedUser;
+
+}

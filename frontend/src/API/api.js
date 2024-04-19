@@ -63,32 +63,12 @@ export const fetchEventByID = async (eventID) => {
     }
   }
 
-
-// export const loginUser = async (email, password) => {
-//     const { dispatch } = useUser();  // Use the dispatch from your User Context
-
-//     try {
-//         const response = await axios.post("http://localhost:9090/login", { email, password });
-//         const { user, token } = response.data;
-
-//         if (response.data.success) {
-//             dispatch({
-//                 type: 'LOGIN',
-//                 payload: {
-//                     user: {
-//                         id: user._id,
-//                         username: user.username,
-//                         email: user.email
-//                     },
-//                     token
-//                 }
-//             });
-//             return { success: true };
-//         } else {
-//             return { success: false, message: response.data.message || "Login failed" };
-//         }
-//     } catch (error) {
-//         console.error("There was an error logging in the user:", error.response ? error.response.data.message : error.message);
-//         return { success: false, message: error.response ? error.response.data.message : "Network error, please try again" };
-//     }
-// };
+  export const updateBooking = async (email, eventID) => {
+    try {
+        const response = await axios.patch(`http://localhost:9090/users/${email}/bookEvent`,  eventID );
+        return response.data;
+    } catch (error) {
+        console.error("There was an error updating the user:", error);
+        throw error;
+    }
+};

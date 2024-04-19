@@ -10,18 +10,18 @@ export const ListEvents = () => {
 
   const fetchInfo = async () => {
     fetchEvents().then((data) => {setAllEvents(data)});
+    setIsLoading(false);
   }
 
   useEffect(() => {
     setIsLoading(true);
     fetchInfo();   
-    setIsLoading(false);
   }, []);
 
   const remove_event = async (id) => {
     const result = await removeEvent(id);
-    if (result == "") {
-      await fetchInfo();
+    if (result === "") {
+      fetchInfo();
     }   
   }
   if (isLoading) return <p> Loading ... </p>;
@@ -40,17 +40,17 @@ export const ListEvents = () => {
       <div className="listevents-allevents">
         <hr />
         {allEvents.map((event) => {
-          return <>
-                  <div key={event.id} className="listevents-format-main listevents-format">
+          return <React.Fragment key={event.id}>
+                  <div className="listevents-format-main listevents-format">
                     <img  src={event.image} className="listevents-events-icon" alt="" />
                     <p>{event.title}</p>
                     <p>£{event.price}</p>
                     <p>{event.description}</p>
                     <p>{event.location}</p>
-                    <img onClick={()=> {remove_event(event.id)}}className="listevents-remove-icon" src={cross_icon} alt="" />
+                    <img onClick={()=> remove_event(event.id)}className="listevents-remove-icon" src={cross_icon} alt="" />
                   </div>
                   <hr />
-                 </>
+                  </React.Fragment>
         })}
       </div>
     </div>
