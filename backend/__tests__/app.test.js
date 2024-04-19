@@ -114,6 +114,19 @@ describe("USERS", () => {
             });
         });
       });
+
+      describe("PATCH /users/:email/bookevent", () => {
+        test("200: updates the user with the booked event", () => {
+          return request(app)
+              .patch("/users/alice.johnson@example.com/bookevent")
+              .send({eventID: 3})
+              .expect(200)
+              .then(({ body }) => {
+                const updatedUser = body;
+                expect(updatedUser.eventData[0]).toStrictEqual({"eventID": 3});
+              });
+          });
+        })
     
 });
 

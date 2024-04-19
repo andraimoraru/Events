@@ -26,7 +26,7 @@ export const LoginSignup = () => {
                 ...response.user, 
                 token: response.token 
             });
-            response.user.isStaff ? window.location.href = "/admin" : navigate("/account"); 
+            response.user.isStaff === true ? navigate("/admin/*")  : navigate("/account"); 
             
         } else {
             alert("Login failed: " + response.message);
@@ -36,7 +36,7 @@ export const LoginSignup = () => {
     const handleSignup = async () => {
         const response = await addUser(formData);
         if (response.success) {
-            setUser({
+            saveUser({
                 ...response.user,
                 token: response.token
             });
