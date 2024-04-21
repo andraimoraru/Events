@@ -1,13 +1,13 @@
 const usersData = [
       {
         id: 1,
-        username: "AliceJ",
-        firstName: "Alice",
-        lastName: "Johnson",
-        email: "alice.johnson@example.com",
-        password: "alice123",
+        username: "ANdra",
+        firstName: "Andra",
+        lastName: "Mora",
+        email: "admin@admin.com",
+        password: "admin123",
         eventData: [],
-        isStaff: false
+        isStaff: true
       },
       {
         id: 2,

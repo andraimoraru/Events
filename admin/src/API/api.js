@@ -75,6 +75,7 @@ export const fetchEventByID = async (eventID) => {
   export const removeEvent = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:9090/events/${id}`);
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error("There was an error fetching the event:", error);
