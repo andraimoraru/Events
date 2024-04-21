@@ -9,6 +9,7 @@ import Event from './Pages/Event.jsx';
 import { UserProvider } from './Context/UserContext.jsx';
 import ProtectedRoute from './Components/ProtectedRoute'; 
 import { Admin } from '../../admin/src/Pages/Admin/Admin.jsx';
+import GoogleSuccess from './Pages/GoogleSuccess.jsx';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path = "/login" element = {<LoginSignup/>}/>
           <Route path = "/account" element = {<Account/>}/>
           <Route path = "/events" element = {<EventsList/>}/>
+          <Route path = "/success" element = {<GoogleSuccess/>}/>
           <Route path = "/event" element = {<Event/>}>
             <Route path = ":eventId" element = {<Event/>}/>
           </Route>
