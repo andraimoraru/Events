@@ -4,9 +4,9 @@
   functions = "netlify-functions"
 
 [dev]
-  command = "npm run dev" # This should start your React/Vite server
-  targetPort = 5174       # Port your frontend runs on
-  port = 8888             # Netlify Dev's own server port (change if 8888 is in use)
+  command = "npm run dev" 
+  targetPort = 5174       
+  port = 8888             
 
 [[redirects]]
   from = "/api/*"

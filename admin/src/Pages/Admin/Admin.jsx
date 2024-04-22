@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './Admin.css';
 import SideBar from '../../Components/SideBar/SideBar.jsx';
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ListEvents from '../../Components/ListEvents/ListEvents.jsx';
 import AddEvent from '../../Components/AddEvent/AddEvent.jsx';
 import AddRemoveStaff from '../../Components/AddRemoveStaff/AddRemoveStaff.jsx';

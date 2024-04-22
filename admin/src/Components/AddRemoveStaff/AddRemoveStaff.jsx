@@ -14,7 +14,7 @@ export const AddRemoveStaff = () => {
 
   const Add_Staff = async () => {
     updateStaff(email, {isStaff: true}).then((user) => {
-      if (user == []) alert ("User not found!")
+      if (user ==[]) alert ("User not found!")
       else alert(`User ${user.username} is added as staff`)
       return user;
     })

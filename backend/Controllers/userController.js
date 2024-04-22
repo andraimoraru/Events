@@ -94,7 +94,7 @@ exports.loginUser = (req, res, next) => {
         const propertyToUpdate = req.body;
 
         fetchUserByEmail(email.email).then((user) => {
-            if (user[0] == []) {  
+            if (!user[0] || user[0] == []) {  
                 return res.status(404).send({ message: "User Not Found" });
             }
             updateUser(email, propertyToUpdate).then((updatedUser) => {
