@@ -31,16 +31,16 @@ app.patch('/users/:email/bookEvent', addBookedEventToUser);
 
 
 const corsOptions = {
-    origin: 'http://localhost:5174', // Assuming your frontend runs at port 5174
-    methods: 'GET,POST,PATCH,DELETE,OPTIONS', 
-    allowedHeaders: 'Content-Type,Authorization', // Allow headers for content type and authorization
-    credentials: true, // Important to handle sessions
+    origin: ['http://localhost:8888', 'http://localhost:5174'], 
+    methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
     optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions)); // Add this to handle pre-flight requests
+app.options('*', cors(corsOptions)); 
 
 const OAuth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID, 
@@ -93,7 +93,7 @@ app.get('/redirect', async (req, res) => {
             calendarId: 'primary',
             resource: eventToAdd,
         });
-        res.redirect('http://localhost:5174/success');  // Assuming your frontend runs at port 5174
+        res.redirect('http://localhost:8888/success');  // Assuming your frontend runs at port 8888
     } catch (error) {
         console.error('Failed to exchange code for tokens:', error);
         res.status(500).send('Authentication failed');
