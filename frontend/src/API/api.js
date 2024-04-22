@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const fetchEvents = async () => {
   try {
-    const response = await axios.get("http://localhost:9090/events");
+    const response = await axios.get("api/events");
     return response.data;
   } catch (error) {
     console.error("There was an error fetching the events:", error);
@@ -13,7 +13,7 @@ export const fetchEvents = async () => {
 
 export const fetchEventByID = async (eventID) => {
     try {
-      const response = await axios.get(`http://localhost:9090/events/${eventID}`);
+      const response = await axios.get(`api/events/${eventID}`);
       return response.data[0];
     } catch (error) {
       console.error("There was an error fetching the events:", error);
@@ -23,7 +23,7 @@ export const fetchEventByID = async (eventID) => {
 
   export const fetchUsers = async () => {
     try {
-        const response = await axios.get(`http://localhost:9090/users`);
+        const response = await axios.get(`api/users`);
         return response.data;
       } catch (error) {
         console.error("There was an error fetching the users:", error);
@@ -34,7 +34,7 @@ export const fetchEventByID = async (eventID) => {
 
   export const fetchUserByEmail = async (email) => {
     try {
-        const response = await axios.get(`http://localhost:9090/users/${email}`);
+        const response = await axios.get(`api/users/${email}`);
         return response.data[0];
       } catch (error) {
         console.error("There was an error fetching the user:", error);
@@ -44,7 +44,7 @@ export const fetchEventByID = async (eventID) => {
 
   export const addUser = async (user) => {
     try {
-      const response = await axios.post("http://localhost:9090/user", user);
+      const response = await axios.post("api/user", user);
       return response.data;
     } catch (error) {
       console.error("There was an error adding the user:", error);
@@ -55,7 +55,7 @@ export const fetchEventByID = async (eventID) => {
 
   export const loginUser = async (user) => {
     try {
-      const response = await axios.post("http://localhost:9090/login", user);
+      const response = await axios.post("api/login", user);
       return response.data;
     } catch (error) {
       console.error("There was an error fetching the user:", error);
@@ -65,7 +65,7 @@ export const fetchEventByID = async (eventID) => {
 
   export const updateBooking = async (email, eventID) => {
     try {
-        const response = await axios.patch(`http://localhost:9090/users/${email}/bookEvent`,  eventID );
+        const response = await axios.patch(`api/users/${email}/bookEvent`,  eventID );
         return response.data;
     } catch (error) {
         console.error("There was an error updating the user:", error);

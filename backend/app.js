@@ -101,6 +101,7 @@ app.get('/redirect', async (req, res) => {
 });
 
 
+
 app.use('/images', express.static('upload/images'));
 
 app.post("/upload", upload.single('event'), (req,res) => {
