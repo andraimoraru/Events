@@ -39,7 +39,7 @@ o	Open the integrated terminal as you did for the backend.
 
 o	Install dependencies: npm install
 
-o	Start the frontend application: npm run dev 
+o	Start the frontend application: netlify dev 
 
 	
 Remember to run the backend before the frontend to ensure the API is ready to accept requests.
@@ -48,13 +48,15 @@ Starting the Application
 
 •	First, run the backend with npm run dev in the backend's integrated terminal.
 
-•	Then, run the frontend with npm run dev in the frontend's integrated terminal.
+•	Then, run the frontend with netlify dev in the frontend's integrated terminal.
 
 Additional Notes
 
 •	To interact with the Google Calendar, you will use the credentials you obtained from the Google Cloud Console.
 
 •	Remember to replace the placeholder values in the .env file with your actual credentials.
+
+For the admin features(add events) use the user login:  admin@admin.com with password admin123.
 
 
 For anyone setting up this project, follow these instructions to start the application locally on your machine. Ensure the ports (9090 for the backend, and 5174 for the frontend by default) are not being used by another process.
