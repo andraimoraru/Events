@@ -1,6 +1,6 @@
-## Events Platform Set-Up & Run Instructions
+# Events Platform Set-Up & Run Instructions
 
-# Prerequisites
+## Prerequisites
 
 •	Node.js installed (skip if already installed)
 •	MongoDB account
@@ -8,7 +8,7 @@
 
 <br />
 
-# Backend Set-Up
+## Backend Set-Up
 
 • Open the backend folder in VS Code 
 
@@ -48,7 +48,7 @@ npm run dev
 
  <br />
  
-# Frontend Set-Up
+## Frontend Set-Up
 
 
 •	Open the frontend folder in VS Code in a new window or tab.
@@ -71,13 +71,13 @@ netlify dev
 	
 Remember to run the backend before the frontend to ensure the API is ready to accept requests.
 
-# Starting the Application
+## Starting the Application
 
 •	First, run the backend with ``` npm run dev ``` in the backend's integrated terminal.
 
 •	Then, run the frontend with ``` netlify dev ``` in the frontend's integrated terminal.
 
-# Additional Notes
+## Additional Notes
 
 •	To interact with the Google Calendar, you will use the credentials you obtained from the Google Cloud Console.
 
