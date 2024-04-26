@@ -35,10 +35,8 @@ npm run seed
 	CLIENT_SECRET=<your_google_client_secret>
 	REDIRECT_URI=http://localhost:9090/redirect
 
-Note: Ensure MongoDB is set up and connected and prepare the Google API credentials.
 
-
-•	Run tests for backend (if needed): npm run test
+•	Run tests for the backend (if needed): npm run test
 
 •	Start the server: 
 
@@ -60,6 +58,13 @@ npm run dev
 ```
 npm install
 ```
+
+•  Install netlify CLI:
+
+```
+npm install netlify-cli -g
+```
+
 
 •	Start the frontend application: 
 
