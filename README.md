@@ -1,56 +1,83 @@
-# Events Platform Set-Up & Run Instructions
+## Events Platform Set-Up & Run Instructions
 
-Prerequisites
+# Prerequisites
 
 •	Node.js installed (skip if already installed)
 •	MongoDB account
 •	Google Cloud account with Google Calendar API enabled
 
-Backend Set-Up
+<br />
 
-o	Open the backend folder in VS Code 
+# Backend Set-Up
 
-o	Open the integrated terminal
+• Open the backend folder in VS Code 
 
-o	Right-click on the sidebar > Select "Open in Integrated Terminal"
+• Open the integrated terminal
 
-o	Install dependencies:  npm install
+• Right-click on the sidebar > Select "Open in Integrated Terminal"
 
-o	Seed the database: npm run seed
+• Install dependencies: 
 
-o	Create a .env file in the root of the backend folder and add your environment variables:
+```
+npm install
+```
 
--	DATABASE_URL=<your_mongodb_atlas_uri>
--	CLIENT_ID=<your_google_client_id>
--	CLIENT_SECRET=<your_google_client_secret>
--	REDIRECT_URI=http://localhost:9090/redirect
+• Seed the database:
+
+```
+npm run seed
+```
+
+• Create a .env file in the root of the backend folder and add your environment variables:
+
+	DATABASE_URL=<your_mongodb_atlas_uri>
+	CLIENT_ID=<your_google_client_id>
+	CLIENT_SECRET=<your_google_client_secret>
+	REDIRECT_URI=http://localhost:9090/redirect
 
 Note: Ensure MongoDB is set up and connected and prepare the Google API credentials.
 
-o	Run tests for backend (if needed): npm run test
 
-o	Start the server: npm run dev
-	
-Frontend Set-Up
+•	Run tests for backend (if needed): npm run test
 
-o	Open the frontend folder in VS Code in a new window or tab.
+•	Start the server: 
 
-o	Open the integrated terminal as you did for the backend.
+```
+npm run dev
+```
 
-o	Install dependencies: npm install
+ <br />
+ 
+# Frontend Set-Up
 
-o	Start the frontend application: netlify dev 
 
+•	Open the frontend folder in VS Code in a new window or tab.
+
+•	Open the integrated terminal as you did for the backend.
+
+•	Install dependencies: 
+
+```
+npm install
+```
+
+•	Start the frontend application: 
+
+```
+netlify dev 
+```
+
+<br />
 	
 Remember to run the backend before the frontend to ensure the API is ready to accept requests.
 
-Starting the Application
+# Starting the Application
 
-•	First, run the backend with npm run dev in the backend's integrated terminal.
+•	First, run the backend with ``` npm run dev ``` in the backend's integrated terminal.
 
-•	Then, run the frontend with netlify dev in the frontend's integrated terminal.
+•	Then, run the frontend with ``` netlify dev ``` in the frontend's integrated terminal.
 
-Additional Notes
+# Additional Notes
 
 •	To interact with the Google Calendar, you will use the credentials you obtained from the Google Cloud Console.
 
